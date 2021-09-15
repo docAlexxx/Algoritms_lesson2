@@ -39,7 +39,9 @@ public class MyArrayList<T extends Comparable<T>> {
             raiseSize();
         }
         //check index
-
+        if (index <= 0 || index > list.length - 1) {
+            throw new IllegalArgumentException("index out of array range!");
+        }
 
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
@@ -63,6 +65,9 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public void remove(int index) {
         //check index
+        if (index <= 0 || index > list.length - 1) {
+            throw new IllegalArgumentException("index out of array range!");
+        }
 
         for (int i = index; i < size; i++) {
             list[i] = list[i + 1];
@@ -89,11 +94,12 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public T get(int index) {
         //check index
+        if (index <= 0 || index > list.length - 1) {
+            throw new IllegalArgumentException("index out of array range!");
+        }
 
         return list[index];
     }
-
-
 
     @Override
     public String toString() {
