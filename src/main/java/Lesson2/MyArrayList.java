@@ -17,13 +17,17 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void add(T item) {
-        //check size
+        if (size == list.length) {
+            raiseSize();
+        }
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
-        //check size
+        if (size == list.length) {
+            raiseSize();
+        }
         //check index
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
@@ -73,6 +77,14 @@ public class MyArrayList<T extends Comparable<T>> {
     public T get(int index) {
         //check index
         return list[index];
+    }
+
+    public void raiseSize() {
+        int newSize = (int) (size * 1.5 + 1);
+        T[] copyArr = (T[]) new Comparable[newSize];
+
+        System.arraycopy(list, 0, copyArr, 0, size);
+        list = copyArr;
     }
 
     @Override
