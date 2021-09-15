@@ -16,14 +16,28 @@ public class MyArrayList<T extends Comparable<T>> {
         list = (T[]) new Comparable[DEFAULT_CAPACITY];
     }
 
+    public void raiseSize() {
+        int newSize = (int) (size * 1.5 + 1);
+        T[] copyArr = (T[]) new Comparable[newSize];
+
+        System.arraycopy(list, 0, copyArr, 0, size);
+        list = copyArr;
+    }
+
     public void add(T item) {
         //check size
+        if (size == list.length) {
+            raiseSize();
+        }
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
         //check size
+        if (size == list.length) {
+            raiseSize();
+        }
         //check index
 
 
