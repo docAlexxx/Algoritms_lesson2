@@ -16,7 +16,16 @@ public class MyArrayList<T extends Comparable<T>> {
         list = (T[]) new Comparable[DEFAULT_CAPACITY];
     }
 
+    public void raiseSize() {
+        int newSize = (int) (size * 1.5 + 1);
+        T[] copyArr = (T[]) new Comparable[newSize];
+
+        System.arraycopy(list, 0, copyArr, 0, size);
+        list = copyArr;
+    }
+
     public void add(T item) {
+        //check size
         if (size == list.length) {
             raiseSize();
         }
@@ -25,6 +34,7 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public void add(int index, T item) {
+        //check size
         if (size == list.length) {
             raiseSize();
         }
@@ -58,6 +68,7 @@ public class MyArrayList<T extends Comparable<T>> {
         if (index <= 0 || index > list.length - 1) {
             throw new IllegalArgumentException("index out of array range!");
         }
+
         for (int i = index; i < size; i++) {
             list[i] = list[i + 1];
         }
@@ -86,15 +97,8 @@ public class MyArrayList<T extends Comparable<T>> {
         if (index <= 0 || index > list.length - 1) {
             throw new IllegalArgumentException("index out of array range!");
         }
+
         return list[index];
-    }
-
-    public void raiseSize() {
-        int newSize = (int) (size * 1.5 + 1);
-        T[] copyArr = (T[]) new Comparable[newSize];
-
-        System.arraycopy(list, 0, copyArr, 0, size);
-        list = copyArr;
     }
 
     @Override

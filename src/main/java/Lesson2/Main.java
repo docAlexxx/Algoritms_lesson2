@@ -9,7 +9,6 @@ import java.util.function.UnaryOperator;
 
 public class Main {
     public static void main(String[] args) {
-
         int n = 100000;
         int item;
         Random random = new Random();
@@ -36,6 +35,7 @@ public class Main {
 
         list3.bubbleSort();
         System.out.println("Bubble Sort time - " + (System.currentTimeMillis() - startTime) / 1000 + "sec");
+
 
     }
 }
