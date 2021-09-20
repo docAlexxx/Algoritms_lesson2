@@ -27,8 +27,8 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     public void insert(T item) {
         if (isFull()) {
-            // расширение массива
-            throw new StackOverflowError();
+            sizeUp();
+ //           throw new StackOverflowError();
         }
         list[size] = item;
         size++;
@@ -37,6 +37,13 @@ public class MyPriorityQueue<T extends Comparable<T>> {
             swap(i, i - 1);
             i--;
         }
+    }
+
+    public void sizeUp(){
+        int newSize = (size  + DEFAULT_CAPACITY);
+        T[] copyArr = (T[]) new Comparable[newSize];
+        System.arraycopy(list, 0, copyArr, 0, size);
+        list = copyArr;
     }
 
     public T remove() {

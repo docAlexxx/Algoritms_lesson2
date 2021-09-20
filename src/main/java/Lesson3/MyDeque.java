@@ -40,10 +40,22 @@ public class MyDeque<T> {
             return list[end];
     }
 
+    public void sizeUp() {
+        int newSize = (size + DEFAULT_CAPACITY);
+        T[] copyArr = (T[]) new Object[newSize];
+        if (end > begin) {
+            System.arraycopy(list, 0, copyArr, 0, size);
+        } else {
+            System.arraycopy(list, 0, copyArr, 0, end);
+            System.arraycopy(list, end, copyArr, end + DEFAULT_CAPACITY, size - end);
+        }
+        list = copyArr;
+    }
+
     public void insertRight(T item) {
         if (isFull()) {
-            //Расширение массива***
-            throw new RuntimeException("Dequeue isFull");
+            sizeUp();
+//            throw new RuntimeException("Dequeue isFull");
         }
         size++;
         list[end] = item;
@@ -52,8 +64,8 @@ public class MyDeque<T> {
 
     public void insertLeft(T item) {
         if (isFull()) {
-            //Расширение массива***
-            throw new RuntimeException("Dequeue isFull");
+            sizeUp();
+//            throw new RuntimeException("Dequeue isFull");
         }
         size++;
         begin = nextIndex(begin, "toLeft");

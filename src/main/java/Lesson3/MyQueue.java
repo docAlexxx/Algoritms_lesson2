@@ -37,12 +37,24 @@ public class MyQueue<T> {
 
     public void insert(T item) {
         if (isFull()) {
-            //Расширение массива***
-            throw new RuntimeException("Queue isFull");
+            sizeUp();
+            //           throw new RuntimeException("Queue isFull");
         }
         size++;
         list[end] = item;
         end = nextIndex(end);
+    }
+
+    public void sizeUp() {
+        int newSize = (size + DEFAULT_CAPACITY);
+        T[] copyArr = (T[]) new Object[newSize];
+        if (end > begin) {
+            System.arraycopy(list, 0, copyArr, 0, size);
+        } else {
+            System.arraycopy(list, 0, copyArr, 0, end);
+            System.arraycopy(list, end, copyArr, end + DEFAULT_CAPACITY, size - end);
+        }
+        list = copyArr;
     }
 
     public T remove() {
