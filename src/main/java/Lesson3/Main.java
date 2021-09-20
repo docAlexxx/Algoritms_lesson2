@@ -58,5 +58,19 @@ public class Main {
  //       for (int i = 0; i < 2; i++) {
  //           System.out.println(deque.removeRight());
  //       }
+
+
+         String word= "apple";
+         String inverWord="";
+
+         MyStack<Character> myStack = new MyStack<>();
+
+        for (int x=0; x<word.length(); x++) {
+            myStack.push(word.charAt(x));
+         }
+        for (int i = 0; i < word.length(); i++) {
+            inverWord=inverWord+(myStack.pop());
+        }
+        System.out.println(inverWord);
     }
 }
