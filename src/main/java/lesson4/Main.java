@@ -37,5 +37,10 @@ public class Main {
         for (Integer x : mll) {
             System.out.println(x);
         }
+
+        System.out.println(mll.indexOf(777));
+        System.out.println(mll.indexOf(22));
+        System.out.println(mll.indexOf(35));
+
     }
 }

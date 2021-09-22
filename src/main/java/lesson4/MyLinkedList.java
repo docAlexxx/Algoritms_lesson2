@@ -68,6 +68,24 @@ public class MyLinkedList<T> implements Iterable<T> {
         }
     }
 
+    public int indexOf(T item) {
+
+        if (isEmpty()) {
+            return -1;
+        }
+
+        Node current = first;
+
+        for (int i = 0; i < size; i++) {
+            if (current.getValue().equals(item)) {
+                return i;
+            } else {
+                current = current.getNext();
+            }
+        }
+        return -1;
+    }
+
     public void insertFirst(T item) {
         Node newNode = new Node(item, first);
         if (isEmpty()) {
