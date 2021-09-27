@@ -1,4 +1,4 @@
-package Lesson2;
+package lesson2;
 
 public class MyArrayList<T extends Comparable<T>> {
     private T[] list;
@@ -16,32 +16,15 @@ public class MyArrayList<T extends Comparable<T>> {
         list = (T[]) new Comparable[DEFAULT_CAPACITY];
     }
 
-    public void raiseSize() {
-        int newSize = (int) (size * 1.5 + 1);
-        T[] copyArr = (T[]) new Comparable[newSize];
-        System.arraycopy(list, 0, copyArr, 0, size);
-        list = copyArr;
-    }
-
     public void add(T item) {
         //check size
-        if (size == list.length) {
-            raiseSize();
-        }
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
         //check size
-        if (size == list.length) {
-            raiseSize();
-        }
         //check index
-        if (index <= 0 || index > list.length - 1) {
-            throw new IllegalArgumentException("index out of array range!");
-        }
-
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
         }
@@ -64,10 +47,6 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public void remove(int index) {
         //check index
-        if (index <= 0 || index > list.length - 1) {
-            throw new IllegalArgumentException("index out of array range!");
-        }
-
         for (int i = index; i < size; i++) {
             list[i] = list[i + 1];
         }
@@ -93,10 +72,6 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public T get(int index) {
         //check index
-        if (index <= 0 || index > list.length - 1) {
-            throw new IllegalArgumentException("index out of array range!");
-        }
-
         return list[index];
     }
 
@@ -172,6 +147,40 @@ public class MyArrayList<T extends Comparable<T>> {
             if (!isSwap) {
                 break;
             }
+        }
+    }
+
+    public void quickSort() {
+        quickSort(0, size - 1);
+    }
+
+    private void quickSort(int lo, int hi) {
+        if (lo >= hi) {
+            return;
+        }
+        int mid = lo + (hi - lo) / 2;
+        T opora = list[mid];
+        int i = lo;
+        int j = hi;
+        while (i <= j) {
+            while (less(list[i], opora)) {
+                i++;
+            }
+            while (less(opora, list[j])) {
+                j--;
+            }
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+
+        if (lo < j) {
+            quickSort(lo, j);
+        }
+        if (hi > i) {
+            quickSort(i, hi);
         }
     }
 
