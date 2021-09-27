@@ -19,7 +19,6 @@ public class MyArrayList<T extends Comparable<T>> {
     public void raiseSize() {
         int newSize = (int) (size * 1.5 + 1);
         T[] copyArr = (T[]) new Comparable[newSize];
-
         System.arraycopy(list, 0, copyArr, 0, size);
         list = copyArr;
     }
