@@ -14,12 +14,21 @@ public class Main {
 //        System.out.println(multiply(3, 8));
 //        System.out.println(recMultiply(3, 8));
 
-        reversPrint("qwerty".toCharArray());
+//        reversPrint("qwerty".toCharArray());
+        System.out.println(exponentiation(2, 5));
 
     }
 
-    public static void reversPrint(char[] arr){
-        reversPrint(arr, arr.length-1);
+    public static int exponentiation(int a, int b) {
+        if (b == 0) {
+            return 1;
+        }
+        return exponentiation(a, b - 1) * a;
+    }
+
+
+    public static void reversPrint(char[] arr) {
+        reversPrint(arr, arr.length - 1);
     }
 
     private static void reversPrint(char[] arr, int n) {
