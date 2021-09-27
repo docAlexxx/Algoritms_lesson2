@@ -15,7 +15,18 @@ public class Main {
 //        System.out.println(recMultiply(3, 8));
 
 //        reversPrint("qwerty".toCharArray());
+
         System.out.println(exponentiation(2, 5));
+
+        Item[] itemsArray = new Item[5];
+        itemsArray[0] = new Item(0, 0);
+        itemsArray[1] = new Item(5, 3);
+        itemsArray[2] = new Item(10, 5);
+        itemsArray[3] = new Item(6, 4);
+        itemsArray[4] = new Item(5, 2);
+
+        BackPack backPack = new BackPack(itemsArray,14);
+        System.out.println("максимальная ценность: " +backPack.itemsChoose(itemsArray.length - 1, backPack.maxMass));
 
     }
 
