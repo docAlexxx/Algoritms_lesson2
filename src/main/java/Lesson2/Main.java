@@ -1,4 +1,4 @@
-package Lesson2;
+package lesson2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,33 +9,84 @@ import java.util.function.UnaryOperator;
 
 public class Main {
     public static void main(String[] args) {
-        int n = 100000;
-        int item;
-        Random random = new Random();
-        MyArrayList<Integer> list1 = new MyArrayList<>(n);
-        MyArrayList<Integer> list2 = new MyArrayList<>(n);
-        MyArrayList<Integer> list3 = new MyArrayList<>(n);
 
+//        int[] arr = new int[5];
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i]+ " ");
+//        }
+
+//        System.out.println(Arrays.toString(arr));
+
+//        int[] a = {1, 2, 3};
+//        int[] b = {4, 5, 6};
+//
+//        b = a;
+//        a[1] = 77;
+//        b[2] = 99;
+//
+//        System.out.println(Arrays.toString(a));
+
+//        String[] str = {"qwe", "asd", "zxc"};
+//
+//        for (int i = 0; i < str.length; i++) {
+//            str[i]+="!!!";
+//        }
+//        System.out.println(Arrays.toString(str));
+
+//        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 43, 3, 2, 4, 2, 4, 2, -21, 1));
+//        System.out.println(list);
+//        list.addAll(2, Arrays.asList(77, 88, 99, 33, 44));
+//        list.remove((Integer) 2);
+
+//        list.removeAll(Arrays.asList(2, 4));
+//        list.removeIf(x -> x == 2);
+//        list.removeIf(x -> x > 2);
+//        list.removeIf(x -> x >= 10 && x <= 100);
+//        list.removeIf(x -> x % 2 != 0);
+
+//        list.replaceAll(x -> x * 2);
+//        list.replaceAll(x -> x % 2 != 0 ? x * 2 : x);
+
+//        System.out.println(list);
+
+//        MyArrayList<Integer> mal = new MyArrayList<>();
+//        mal.add(2);
+//        mal.add(4);
+//        mal.add(7);
+//        System.out.println(mal);
+//        mal.add(1, 77);
+//        System.out.println(mal);
+
+//        MySortedArrayList<Integer> msal = new MySortedArrayList<>();
+//        msal.add(6);
+//        msal.add(16);
+//        msal.add(3);
+//        msal.add(7);
+//        msal.add(5);
+//        msal.add(5);
+//
+//        System.out.println(msal);
+////        System.out.println(msal.binaryFind(7));
+//        System.out.println(msal.recBynaryFind(5));
+
+        int n = 10000000;
+        Random random = new Random();
+        MyArrayList<Integer> mal = new MyArrayList<>(n);
         for (int i = 0; i < n; i++) {
-            item = random.nextInt(100);
-            list1.add(item);
-            list2.add(item);
-            list3.add(item);
+            mal.add(random.nextInt(1000));
         }
 
-        long startTime = System.currentTimeMillis();
+        long begin = System.currentTimeMillis();
 
-        list1.selectionSort();
-        System.out.println("Selection Sort time - " + (System.currentTimeMillis() - startTime) / 1000 + "sec");
-        startTime = System.currentTimeMillis();
+//        System.out.println(mal);
+//        mal.selectionSort(); // 11950 ms
+//        mal.insertionSort(); // 4747 ms
+//        mal.bubbleSort();  // 33680 ms
+        mal.quickSort(); // 86 ms  O(n log n)
+//        System.out.println(mal);
 
-        list2.insertionSort();
-        System.out.println("Insertion Sort time - " + (System.currentTimeMillis() - startTime) / 1000 + "sec");
-        startTime = System.currentTimeMillis();
-
-        list3.bubbleSort();
-        System.out.println("Bubble Sort time - " + (System.currentTimeMillis() - startTime) / 1000 + "sec");
-
+        long end = System.currentTimeMillis();
+        System.out.printf("Time: %d ms", end - begin);
 
     }
 }
