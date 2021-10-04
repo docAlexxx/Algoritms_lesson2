@@ -11,11 +11,13 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         Node left;
         Node right;
         int size;
+        int deep;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.size = 1;
+            this.deep = 0;
         }
     }
 
@@ -23,11 +25,31 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         return size(root);
     }
 
+    public int height() {
+        return height(root);
+    }
+
     private int size(Node node) {
         if (node == null) {
             return 0;
         }
         return node.size;
+    }
+
+    private int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        if (node.left.deep == 0 && node.right.deep == 0) {
+            return 0;
+        }
+
+        if (node.left.deep >= node.right.deep) {
+            return node.left.deep + 1;
+        } else {
+            return node.right.deep + 1;
+        }
     }
 
     public boolean isEmpty() {
@@ -85,6 +107,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.right = put(node.right, key, value);
         }
         node.size = size(node.left) + size(node.right) + 1;
+        node.deep=height(node);
         return node;
     }
 
@@ -112,6 +135,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         }
         node.left = removeMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
+        node.deep=height(node);
         return node;
     }
 
@@ -142,6 +166,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.left = temp.left;
         }
         node.size = size(node.left) + size(node.right) + 1;
+        node.deep=height(node);
         return node;
     }
 
