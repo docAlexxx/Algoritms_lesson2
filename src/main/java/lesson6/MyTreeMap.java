@@ -25,8 +25,8 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         return size(root);
     }
 
-    public int height() {
-        return height(root);
+    public int deep() {
+        return deep(root);
     }
 
     private int size(Node node) {
@@ -36,20 +36,25 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         return node.size;
     }
 
-    private int height(Node node) {
+    private int deep(Node node) {
         if (node == null) {
             return 0;
         }
 
-        if (node.left.deep == 0 && node.right.deep == 0) {
+        if (node.left == null && node.right == null) {
             return 0;
         }
 
-        if (node.left.deep >= node.right.deep) {
-            return node.left.deep + 1;
-        } else {
+        if (node.left == null) {
             return node.right.deep + 1;
+        } else {
+            if (node.right == null) {
+                return node.left.deep + 1;
+            } else {
+                return Math.max(node.right.deep, node.left.deep) + 1;
+            }
         }
+
     }
 
     public boolean isEmpty() {
@@ -107,7 +112,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.right = put(node.right, key, value);
         }
         node.size = size(node.left) + size(node.right) + 1;
-        node.deep=height(node);
+        node.deep = deep(node);
         return node;
     }
 
@@ -135,7 +140,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         }
         node.left = removeMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
-        node.deep=height(node);
+        node.deep = deep(node);
         return node;
     }
 
@@ -166,7 +171,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.left = temp.left;
         }
         node.size = size(node.left) + size(node.right) + 1;
-        node.deep=height(node);
+        node.deep = deep(node);
         return node;
     }
 
@@ -182,6 +187,17 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         return toString(node.left) + " " +
                 node.key + "=" + node.value + " " +
                 toString(node.right);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+
+        if (Math.abs(node.left.deep - node.right.deep) <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -20,6 +20,6 @@ public class Main {
 
         map.remove(1);
         System.out.println(map);
-
+        System.out.println(map.deep());
     }
 }
