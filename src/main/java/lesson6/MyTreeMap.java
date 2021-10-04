@@ -189,16 +189,33 @@ public class MyTreeMap<K extends Comparable<K>, V> {
                 toString(node.right);
     }
 
+    public boolean isBalanced(){
+       return isBalanced(root);
+    }
+
     private boolean isBalanced(Node node) {
         if (node == null) {
             return true;
         }
 
-        if (Math.abs(node.left.deep - node.right.deep) <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+        if (node.left == null && node.right == null) {
             return true;
         }
+
+        if (node.left == null) {
+            if (node.right.deep < 2 && isBalanced(node.right)) {
+                return true;
+            }
+        } else {
+            if (node.right == null) {
+                if (node.left.deep < 2 && isBalanced(node.left)) {
+                    return true;
+                }
+            } else if (Math.abs(node.left.deep - node.right.deep) <= 1 && isBalanced(node.left) && isBalanced(node.right)) {
+                return true;
+            }
+        }
+
         return false;
     }
-
-
 }
